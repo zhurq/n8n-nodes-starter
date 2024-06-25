@@ -1,19 +1,29 @@
-import { INodeTypeMasaBaseDescription, MasaBase } from '../../src/MasaBase/MasaBase';
+import path from 'path';
+import { readFileSync } from 'fs';
+import { INodeTypeMasaBaseDescription, MasaConf, MasaBase } from '../../src/MasaBase/MasaBase';
 
 export class Masa_DC0_03300132_01 extends MasaBase {
 	constructor() {
+        let masaconf: MasaConf = JSON.parse(readFileSync(path.join(__dirname, 'masa.json'), { encoding: 'utf8' }));
+
+        let version = masaconf.version;
+        let dcn = masaconf.dcn;
+        let serviceid = masaconf.serviceid;
+        let scenarioid = masaconf.scenarioid;
+        let name = `Masa_${dcn}_${serviceid}_${scenarioid}`;
+        
 		const baseDescription: INodeTypeMasaBaseDescription = {
-			displayName: 'Masa_DC0_03300132_01',            
-            name: 'Masa_DC0_03300132_01',
+			displayName: name,            
+            name: name,
             group: ['output'],
-            version: [1],
-            description: 'Returns data for Masa_DC0_03300132_01',
+            version: [version],
+            description: `Returns data for ${name}`,
             defaults: {
-                name: 'Masa_DC0_03300132_01',
+                name: name,
             },
-            subtitle: 'Masa_DC0_03300132_01'
+            subtitle: name
 		};
 
-		super('DC0', '03300132', '01', 'POST', `http://172.21.193.192:1859/sidecar/http/03300132/01/5036?dcn=DC0`, baseDescription);
+		super(masaconf, baseDescription);
 	}
 }

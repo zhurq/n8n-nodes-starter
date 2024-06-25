@@ -45,6 +45,15 @@ function toText<T>(data: T) {
 	return data;
 }
 
+export interface MasaConf {
+	version: number;
+	dcn: string;
+	serviceid: string;
+	scenarioid: string;
+	method: string;
+	openapi: string;
+}
+
 export class INodeTypeMasaBaseDescription implements INodeTypeBaseDescription {
 	displayName: string = '';
 	name: string = '';
@@ -67,10 +76,20 @@ export class INodeTypeMasaBaseDescription implements INodeTypeBaseDescription {
 	hidden?: true;
 }
 
+const urlPre = `http://172.21.193.192:1859/sidecar/http/`;
+const urlSuf = `/5036?dcn=`;
+
 export class MasaBase implements INodeType {
 	description: INodeTypeDescription;
 
-	constructor(dcn: string, serviceid: string, scenarioid: string, method: string, url: string, baseDescription: INodeTypeMasaBaseDescription) {
+	constructor(masaconf: MasaConf, baseDescription: INodeTypeMasaBaseDescription) {
+		let dcn = masaconf.dcn;
+        let serviceid = masaconf.serviceid;
+        let scenarioid = masaconf.scenarioid;
+        let method = masaconf.method;
+        let openapi = masaconf.openapi;
+		let url = `${urlPre}${serviceid}/${scenarioid}${urlSuf}${dcn}`;
+
 		this.description = {
 			...baseDescription,
 			icon: 'file:Masa.svg',
@@ -146,6 +165,20 @@ export class MasaBase implements INodeType {
                         },
                     ],
                     default: url,
+                    required: true,
+                },
+                {
+                    displayName: '',
+                    name: 'openapi',
+                    noDataExpression: true,
+                    type: 'options',
+                    options: [
+                        {
+                            name: openapi,
+                            value: openapi,
+                        },
+                    ],
+                    default: openapi,
                     required: true,
                 },
                 {

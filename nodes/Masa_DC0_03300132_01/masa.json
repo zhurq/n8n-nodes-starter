@@ -1,0 +1,8 @@
+{
+    "version": 1,
+    "dcn": "DC0",
+    "serviceid": "03300132",
+    "scenarioid": "01",
+    "method": "POST",
+    "openapi":"{\"openapi\":\"3.0.0\",\"info\":{\"version\":\"1.0.0\",\"title\":\"My API\"},\"paths\":{\"/openapi-test\":{\"post\":{\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"item\":{\"type\":\"string\",\"minLength\":1}},\"required\":[\"item\"]}}}},\"responses\":{\"200\":{\"description\":\"star count\",\"content\":{\"application/json\":{\"schema\":{\"startcount\":{\"type\":\"object\",\"properties\":{\"golang/go\":{\"type\":\"number\"}}}}}}}}}}}}"
+}
