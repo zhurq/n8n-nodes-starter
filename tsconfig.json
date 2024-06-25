@@ -25,6 +25,6 @@
 		"credentials/**/*",
 		"nodes/**/*",
 		"nodes/**/*.json",
-		"package.json", "src/MasaBase", "utils",
+		"package.json", "src/MasaBase", "utils", "gen_masa_node/*", "gen_masa_node/*.json"
 	],
 }
